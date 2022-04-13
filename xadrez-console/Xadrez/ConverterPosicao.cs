@@ -2,8 +2,9 @@
 
 namespace xadrez_console.Xadrez
 {
-    public class ConverterPosicao
+    class ConverterPosicao
     {
+
         public char Coluna { get; set; }
         public int Linha { get; set; }
 
@@ -12,10 +13,12 @@ namespace xadrez_console.Xadrez
             Coluna = coluna;
             Linha = linha;
         }
+
         public Posicao toPosicao()
         {
             return new Posicao(8 - Linha, Coluna - 'a');
         }
+
         public override string ToString()
         {
             return "" + Coluna + Linha;

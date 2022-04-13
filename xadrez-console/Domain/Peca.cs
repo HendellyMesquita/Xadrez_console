@@ -1,22 +1,42 @@
 ﻿namespace xadrez_console.Domain
 {
-    public abstract class Peca
+    abstract class Peca
     {
         public Posicao Posicao { get; set; }
         public Cor Cor { get; protected set; }
-        public int QteMovimento { get; protected set; }
-        public Tabuleiro Tabuleiro { get; set; }
+        public int QteMovimentos { get; protected set; }
+        public Tabuleiro Tabuleiro { get; protected set; }
 
         public Peca(Tabuleiro tabuleiro, Cor cor)
         {
             Posicao = null;
-            Cor = cor;
             Tabuleiro = tabuleiro;
-            QteMovimento = 0;
+            Cor = cor;
+
+            QteMovimentos = 0;
         }
-        public void incrementaMovimento()
+
+        public void IncrementaMovimento()
         {
-            QteMovimento++;
+            QteMovimentos++;
+        }
+
+        public bool VerificaMovimento()
+        {
+            bool[,] movimentos = MovimentosPossiveis();
+            for (int linha = 0; linha < Tabuleiro.Linhas; linha++)
+            {
+                for (int coluna = 0; coluna < Tabuleiro.Colunas; coluna++)
+                {
+                    if (movimentos[linha, coluna])
+                        return true;
+                }
+            }
+            return false;
+        }
+        public bool verificaDestino(Posicao posicao)
+        {
+            return MovimentosPossiveis()[posicao.Linha, posicao.Coluna];
         }
 
         public abstract bool[,] MovimentosPossiveis();

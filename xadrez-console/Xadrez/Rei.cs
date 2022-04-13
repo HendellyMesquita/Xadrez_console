@@ -2,70 +2,79 @@
 
 namespace xadrez_console.Xadrez
 {
-    public class Rei : Peca
+    class Rei : Peca
     {
+
         public Rei(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
         {
-
         }
+
         public override string ToString()
         {
             return "R";
         }
-        private bool mova_se(Posicao posicao)
+
+        private bool Mova_se(Posicao  posicao)
         {
             Peca peca = Tabuleiro.peca(posicao);
             return peca == null || peca.Cor != Cor;
         }
+
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] movimentos = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
 
-            Posicao posicao = new Posicao(0, 0);
+            Posicao  peca = new Posicao(0, 0);
 
-            //cima
-            Posicao.DefinaValores(posicao.Linha - 1, posicao.Coluna);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
-            // cima direita
-            Posicao.DefinaValores(posicao.Linha - 1, posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
-            //direita
-            Posicao.DefinaValores(posicao.Linha, posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
-            // baixo direita
-            Posicao.DefinaValores(posicao.Linha + 1, posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
-            // baixo
-            Posicao.DefinaValores(posicao.Linha + 1, posicao.Coluna);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
-            // baixo esquerda
-            Posicao.DefinaValores(posicao.Linha + 1, posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
-            //  esquerda
-            Posicao.DefinaValores(posicao.Linha, posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
-            //cima direita
-            Posicao.DefinaValores(posicao.Linha - 1, posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(posicao) && mova_se(posicao))
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-
+            // acima
+             peca.definirValores(Posicao.Linha - 1, Posicao.Coluna);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
+            // ne
+             peca.definirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
+            // direita
+             peca.definirValores(Posicao.Linha, Posicao.Coluna + 1);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
+            // se
+             peca.definirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
+            // abaixo
+             peca.definirValores(Posicao.Linha + 1, Posicao.Coluna);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
+            // so
+             peca.definirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
+            // esquerda
+             peca.definirValores(Posicao.Linha, Posicao.Coluna - 1);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
+            // no
+             peca.definirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
+            if (Tabuleiro.posicaoValida( peca) && Mova_se( peca))
+            {
+                movimentos[ peca.Linha,  peca.Coluna] = true;
+            }
             return movimentos;
         }
-
-
     }
 }
