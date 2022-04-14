@@ -2,19 +2,19 @@
 
 namespace xadrez_console.Xadrez
 {
-    class ConverterPosicao
+    class PosicaoXadrez
     {
 
         public char Coluna { get; set; }
         public int Linha { get; set; }
 
-        public ConverterPosicao(char coluna, int linha)
+        public PosicaoXadrez(char coluna, int linha)
         {
             Coluna = coluna;
             Linha = linha;
         }
 
-        public Posicao toPosicao()
+        public Posicao ToPosicao()
         {
             return new Posicao(8 - Linha, Coluna - 'a');
         }

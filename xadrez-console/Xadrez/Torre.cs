@@ -5,7 +5,7 @@ namespace xadrez_console.Xadrez
     class Torre : Peca
     {
 
-        public Torre(Tabuleiro Tabuleiro, Cor Cor) : base(Tabuleiro, Cor)
+        public Torre(Tabuleiro Tabuleiro, Cor cor) : base(Tabuleiro, cor)
         {
         }
 
@@ -14,9 +14,9 @@ namespace xadrez_console.Xadrez
             return "T";
         }
 
-        private bool Mova_se(Posicao posicao)
+        private bool Mova_se(Posicao Posicao)
         {
-            Peca peca = Tabuleiro.peca(posicao);
+            Peca peca = Tabuleiro.Peca(Posicao);
             return peca == null || peca.Cor != Cor;
         }
 
@@ -24,54 +24,54 @@ namespace xadrez_console.Xadrez
         {
             bool[,] movimentos = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
 
-            Posicao posicao = new Posicao(0, 0);
+            Posicao Posicao = new Posicao(0, 0);
 
             // acima
-            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
+            Posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
+            while (Tabuleiro.PosicaoValida(Posicao) && Mova_se(Posicao))
             {
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                movimentos[Posicao.Linha, Posicao.Coluna] = true;
+                if (Tabuleiro.Peca(Posicao) != null && Tabuleiro.Peca(Posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.Linha = posicao.Linha - 1;
+                Posicao.Linha = Posicao.Linha - 1;
             }
 
             // abaixo
-            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
+            Posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
+            while (Tabuleiro.PosicaoValida(Posicao) && Mova_se(Posicao))
             {
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                movimentos[Posicao.Linha, Posicao.Coluna] = true;
+                if (Tabuleiro.Peca(Posicao) != null && Tabuleiro.Peca(Posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.Linha = posicao.Linha + 1;
+                Posicao.Linha = Posicao.Linha + 1;
             }
 
             // direita
-            posicao.definirValores(Posicao.Linha, Posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
+            Posicao.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
+            while (Tabuleiro.PosicaoValida(Posicao) && Mova_se(Posicao))
             {
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                movimentos[Posicao.Linha, Posicao.Coluna] = true;
+                if (Tabuleiro.Peca(Posicao) != null && Tabuleiro.Peca(Posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.Coluna = posicao.Coluna + 1;
+                Posicao.Coluna = Posicao.Coluna + 1;
             }
 
             // esquerda
-            posicao.definirValores(Posicao.Linha, Posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
+            Posicao.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
+            while (Tabuleiro.PosicaoValida(Posicao) && Mova_se(Posicao))
             {
-                movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                movimentos[Posicao.Linha, Posicao.Coluna] = true;
+                if (Tabuleiro.Peca(Posicao) != null && Tabuleiro.Peca(Posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.Coluna = posicao.Coluna - 1;
+                Posicao.Coluna = Posicao.Coluna - 1;
             }
 
             return movimentos;

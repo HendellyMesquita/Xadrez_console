@@ -17,7 +17,7 @@ namespace xadrez_console.Xadrez
 
         private bool Mova_se(Posicao posicao)
         {
-            Peca peca = Tabuleiro.peca(posicao);
+            Peca peca = Tabuleiro.Peca(posicao);
             return peca == null || peca.Cor != Cor;
         }
 
@@ -28,99 +28,99 @@ namespace xadrez_console.Xadrez
             Posicao posicao = new Posicao(0, 0);
 
             // esquerda
-            posicao.definirValores(Posicao.Linha, Posicao.Coluna - 1);
+            posicao.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha, posicao.Coluna - 1);
+                posicao.DefinirValores(posicao.Linha, posicao.Coluna - 1);
             }
 
             // direita
-            posicao.definirValores(Posicao.Linha, Posicao.Coluna + 1);
+            posicao.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha, posicao.Coluna + 1);
+                posicao.DefinirValores(posicao.Linha, posicao.Coluna + 1);
             }
 
             // acima
-            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna);
+            posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha - 1, posicao.Coluna);
+                posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna);
             }
 
             // abaixo
-            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna);
+            posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha + 1, posicao.Coluna);
+                posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna);
             }
 
             // NO
-            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
+            posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha - 1, posicao.Coluna - 1);
+                posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna - 1);
             }
 
             // NE
-            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
+            posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha - 1, posicao.Coluna + 1);
+                posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna + 1);
             }
 
             // SE
-            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
+            posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha + 1, posicao.Coluna + 1);
+                posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna + 1);
             }
 
             // SO
-            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
+            posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
             while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
-                if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
+                if (Tabuleiro.Peca(posicao) != null && Tabuleiro.Peca(posicao).Cor != Cor)
                 {
                     break;
                 }
-                posicao.definirValores(posicao.Linha + 1, posicao.Coluna - 1);
+                posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna - 1);
             }
 
             return movimentos;

@@ -12,31 +12,35 @@
             Posicao = null;
             Tabuleiro = tabuleiro;
             Cor = cor;
-
             QteMovimentos = 0;
         }
 
-        public void IncrementaMovimento()
+        public void IncrementaMovimentos()
         {
             QteMovimentos++;
         }
-        public void DecrementaMovimento()
+
+        public void Decrementaovimentos()
         {
             QteMovimentos--;
         }
+
         public bool VerificaMovimento()
         {
-            bool[,] movimentos = MovimentosPossiveis();
-            for (int linha = 0; linha < Tabuleiro.Linhas; linha++)
+            bool[,] mat = MovimentosPossiveis();
+            for (int i = 0; i < Tabuleiro.Linhas; i++)
             {
-                for (int coluna = 0; coluna < Tabuleiro.Colunas; coluna++)
+                for (int j = 0; j < Tabuleiro.Colunas; j++)
                 {
-                    if (movimentos[linha, coluna])
+                    if (mat[i, j])
+                    {
                         return true;
+                    }
                 }
             }
             return false;
         }
+
         public bool VerificaDestino(Posicao posicao)
         {
             return MovimentosPossiveis()[posicao.Linha, posicao.Coluna];

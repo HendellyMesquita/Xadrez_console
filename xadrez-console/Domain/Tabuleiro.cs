@@ -5,50 +5,50 @@
 
         public int Linhas { get; set; }
         public int Colunas { get; set; }
-        private Peca[,] pecas;
+        private Peca[,] Pecas;
 
         public Tabuleiro(int linhas, int colunas)
         {
             Linhas = linhas;
             Colunas = colunas;
-            pecas = new Peca[linhas, colunas];
+            Pecas = new Peca[linhas, colunas];
         }
 
-        public Peca peca(int linha, int coluna)
+        public Peca Peca(int linha, int coluna)
         {
-            return pecas[linha, coluna];
+            return Pecas[linha, coluna];
         }
 
-        public Peca peca(Posicao pos)
+        public Peca Peca(Posicao pos)
         {
-            return pecas[pos.Linha, pos.Coluna];
+            return Pecas[pos.Linha, pos.Coluna];
         }
 
-        public bool existePeca(Posicao pos)
+        public bool ExistePeca(Posicao pos)
         {
-            validarPosicao(pos);
-            return peca(pos) != null;
+            ValidarPosicao(pos);
+            return Peca(pos) != null;
         }
 
-        public void colocarPeca(Peca p, Posicao pos)
+        public void ColocarPeca(Peca p, Posicao pos)
         {
-            if (existePeca(pos))
+            if (ExistePeca(pos))
             {
                 throw new TabuleiroException("Já existe uma peça nessa posição!");
             }
-            pecas[pos.Linha, pos.Coluna] = p;
+            Pecas[pos.Linha, pos.Coluna] = p;
             p.Posicao = pos;
         }
 
         public Peca RetirarPeca(Posicao pos)
         {
-            if (peca(pos) == null)
+            if (Peca(pos) == null)
             {
                 return null;
             }
-            Peca aux = peca(pos);
+            Peca aux = Peca(pos);
             aux.Posicao = null;
-            pecas[pos.Linha, pos.Coluna] = null;
+            Pecas[pos.Linha, pos.Coluna] = null;
             return aux;
         }
 
@@ -61,7 +61,7 @@
             return true;
         }
 
-        public void validarPosicao(Posicao pos)
+        public void ValidarPosicao(Posicao pos)
         {
             if (!PosicaoValida(pos))
             {
