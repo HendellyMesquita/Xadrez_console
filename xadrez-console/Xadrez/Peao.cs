@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using xadrez_console.Domain;
-using xadrez_console.Xadrez;
+﻿using xadrez_console.Domain;
 
-namespace xadrez_console.xadrez
+namespace xadrez_console.Xadrez
 {
+
     class Peao : Peca
     {
-        public Peao(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
+
+        private PartidaDeXadrez Partida;
+
+        public Peao(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base(tab, cor)
         {
+            Partida = partida;
         }
+
 
         public override string ToString()
         {
@@ -59,21 +59,6 @@ namespace xadrez_console.xadrez
                 {
                     movimentos[posicao.Linha, posicao.Coluna] = true;
                 }
-
-               // // #jogadaespecial en passant
-                //if (Posicao.Linha == 3)
-                //{
-                //    Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
-                //    if (Tabuleiro.PosicaoValida(esquerda) && existeInimigo(esquerda) && Tabuleiro.peca(esquerda) == partida.vulneravelEnPassant)
-                //    {
-                //        movimentos[esquerda.Linha - 1, esquerda.Coluna] = true;
-                //    }
-                //    Posicao direita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
-                //    if (Tabuleiro.PosicaoValida(direita) && existeInimigo(direita) && Tabuleiro.peca(direita) == partida.vulneravelEnPassant)
-                //    {
-                //        movimentos[direita.Linha - 1, direita.Coluna] = true;
-                //    }
-                //}
             }
             else
             {
@@ -99,20 +84,19 @@ namespace xadrez_console.xadrez
                     movimentos[posicao.Linha, posicao.Coluna] = true;
                 }
 
-                //// #jogadaespecial en passant
-                //if (Posicao.Linha == 4)
-                //{
-                //    Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
-                //    if (Tabuleiro.PosicaoValida(esquerda) && existeInimigo(esquerda) && Tabuleiro.peca(esquerda) == partida.vulneravelEnPassant)
-                //    {
-                //        movimentos[esquerda.Linha + 1, esquerda.Coluna] = true;
-                //    }
-                //    Posicao direita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
-                //    if (Tabuleiro.PosicaoValida(direita) && existeInimigo(direita) && Tabuleiro.peca(direita) == partida.vulneravelEnPassant)
-                //    {
-                //        movimentos[direita.Linha + 1, direita.Coluna] = true;
-                //    }
-                //}
+                if (posicao.Linha == 4)
+                {
+                    Posicao esquerda = new Posicao(posicao.Linha, posicao.Coluna - 1);
+                    if (Tabuleiro.PosicaoValida(esquerda) && existeInimigo(esquerda) && Tabuleiro.peca(esquerda) == Partida.VulneravelEnPassant)
+                    {
+                        movimentos[esquerda.Linha + 1, esquerda.Coluna] = true;
+                    }
+                    Posicao direita = new Posicao(posicao.Linha, posicao.Coluna + 1);
+                    if (Tabuleiro.PosicaoValida(direita) && existeInimigo(direita) && Tabuleiro.peca(direita) == Partida.VulneravelEnPassant)
+                    {
+                        movimentos[direita.Linha + 1, direita.Coluna] = true;
+                    }
+                }
             }
 
             return movimentos;

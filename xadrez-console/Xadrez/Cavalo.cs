@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using xadrez_console.Domain;
+﻿using xadrez_console.Domain;
 
-namespace xadrez_console.xadrez
+namespace xadrez_console.Xadrez
 {
+
     class Cavalo : Peca
     {
 
@@ -19,7 +15,7 @@ namespace xadrez_console.xadrez
             return "C";
         }
 
-        private bool podeMover(Posicao posicao)
+        private bool Mova_se(Posicao posicao)
         {
             Peca peca = Tabuleiro.peca(posicao);
             return peca == null || peca.Cor != Cor;
@@ -31,43 +27,43 @@ namespace xadrez_console.xadrez
 
             Posicao posicao = new Posicao(0, 0);
 
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna - 2);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna - 2);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            posicao.definirValores(posicao.Linha - 2, posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha - 2, Posicao.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            posicao.definirValores(posicao.Linha - 2, posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha - 2, Posicao.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna + 2);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna + 2);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna + 2);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna + 2);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            posicao.definirValores(posicao.Linha + 2, posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha + 2, Posicao.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            posicao.definirValores(posicao.Linha + 2, posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha + 2, Posicao.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna - 2);
-            if (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna - 2);
+            if (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
             }

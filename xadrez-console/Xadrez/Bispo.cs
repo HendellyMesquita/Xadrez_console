@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using xadrez_console.Domain;
+﻿using xadrez_console.Domain;
 
-namespace xadrez_console.xadrez
+namespace xadrez_console.Xadrez
 {
+
     class Bispo : Peca
     {
 
@@ -19,7 +15,7 @@ namespace xadrez_console.xadrez
             return "B";
         }
 
-        private bool podeMover(Posicao posicao)
+        private bool Mova_se(Posicao posicao)
         {
             Peca peca = Tabuleiro.peca(posicao);
             return peca == null || peca.Cor != Cor;
@@ -27,15 +23,15 @@ namespace xadrez_console.xadrez
 
         public override bool[,] MovimentosPossiveis()
         {
-            bool[,] mat = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
+            bool[,] movimentos = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
 
             Posicao posicao = new Posicao(0, 0);
 
             // NO
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
-                mat[posicao.Linha, posicao.Coluna] = true;
+                movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
                 {
                     break;
@@ -44,10 +40,10 @@ namespace xadrez_console.xadrez
             }
 
             // NE
-            posicao.definirValores(posicao.Linha - 1, posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
-                mat[posicao.Linha, posicao.Coluna] = true;
+                movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
                 {
                     break;
@@ -56,10 +52,10 @@ namespace xadrez_console.xadrez
             }
 
             // SE
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
-                mat[posicao.Linha, posicao.Coluna] = true;
+                movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
                 {
                     break;
@@ -68,10 +64,10 @@ namespace xadrez_console.xadrez
             }
 
             // SO
-            posicao.definirValores(posicao.Linha + 1, posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
-                mat[posicao.Linha, posicao.Coluna] = true;
+                movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
                 {
                     break;
@@ -79,7 +75,7 @@ namespace xadrez_console.xadrez
                 posicao.definirValores(posicao.Linha + 1, posicao.Coluna - 1);
             }
 
-            return mat;
+            return movimentos;
         }
     }
 }

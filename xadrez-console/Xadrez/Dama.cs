@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using xadrez_console.Domain;
+﻿using xadrez_console.Domain;
 
-namespace xadrez_console.xadrez
+namespace xadrez_console.Xadrez
 {
+
     class Dama : Peca
     {
 
@@ -19,7 +15,7 @@ namespace xadrez_console.xadrez
             return "D";
         }
 
-        private bool podeMover(Posicao posicao)
+        private bool Mova_se(Posicao posicao)
         {
             Peca peca = Tabuleiro.peca(posicao);
             return peca == null || peca.Cor != Cor;
@@ -33,7 +29,7 @@ namespace xadrez_console.xadrez
 
             // esquerda
             posicao.definirValores(Posicao.Linha, Posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -45,7 +41,7 @@ namespace xadrez_console.xadrez
 
             // direita
             posicao.definirValores(Posicao.Linha, Posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -57,7 +53,7 @@ namespace xadrez_console.xadrez
 
             // acima
             posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -69,7 +65,7 @@ namespace xadrez_console.xadrez
 
             // abaixo
             posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -81,7 +77,7 @@ namespace xadrez_console.xadrez
 
             // NO
             posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -93,7 +89,7 @@ namespace xadrez_console.xadrez
 
             // NE
             posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -105,7 +101,7 @@ namespace xadrez_console.xadrez
 
             // SE
             posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -117,7 +113,7 @@ namespace xadrez_console.xadrez
 
             // SO
             posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(posicao) && podeMover(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)

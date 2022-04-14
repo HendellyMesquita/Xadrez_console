@@ -2,7 +2,6 @@
 {
     enum Cor
     {
-        Amarelo,
         Azul,
         Ciano,
     }
