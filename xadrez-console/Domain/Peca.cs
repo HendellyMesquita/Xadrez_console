@@ -20,7 +20,10 @@
         {
             QteMovimentos++;
         }
-
+        public void DecrementaMovimento()
+        {
+            QteMovimentos--;
+        }
         public bool VerificaMovimento()
         {
             bool[,] movimentos = MovimentosPossiveis();
