@@ -28,7 +28,7 @@ namespace xadrez_console.Xadrez
 
             // acima
             posicao.definirValores(Posicao.Linha - 1, Posicao.Coluna);
-            while (Tabuleiro.posicaoValida(posicao) && Mova_se(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -40,7 +40,7 @@ namespace xadrez_console.Xadrez
 
             // abaixo
             posicao.definirValores(Posicao.Linha + 1, Posicao.Coluna);
-            while (Tabuleiro.posicaoValida(posicao) && Mova_se(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -52,7 +52,7 @@ namespace xadrez_console.Xadrez
 
             // direita
             posicao.definirValores(Posicao.Linha, Posicao.Coluna + 1);
-            while (Tabuleiro.posicaoValida(posicao) && Mova_se(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)
@@ -64,7 +64,7 @@ namespace xadrez_console.Xadrez
 
             // esquerda
             posicao.definirValores(Posicao.Linha, Posicao.Coluna - 1);
-            while (Tabuleiro.posicaoValida(posicao) && Mova_se(posicao))
+            while (Tabuleiro.PosicaoValida(posicao) && Mova_se(posicao))
             {
                 movimentos[posicao.Linha, posicao.Coluna] = true;
                 if (Tabuleiro.peca(posicao) != null && Tabuleiro.peca(posicao).Cor != Cor)

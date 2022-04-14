@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using xadrez_console.Domain;
+using xadrez_console.xadrez;
 
 namespace xadrez_console.Xadrez
 {
@@ -29,9 +29,9 @@ namespace xadrez_console.Xadrez
 
         public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
-            Peca peca = Tabuleiro.retirarPeca(origem);
+            Peca peca = Tabuleiro.RetirarPeca(origem);
             peca.IncrementaMovimento();
-            Peca pecaCapturada = Tabuleiro.retirarPeca(destino);
+            Peca pecaCapturada = Tabuleiro.RetirarPeca(destino);
             Tabuleiro.colocarPeca(peca, destino);
             if (pecaCapturada != null)
                 PecasCapturadas.Add(pecaCapturada);
@@ -44,7 +44,7 @@ namespace xadrez_console.Xadrez
 
             if (EmXeque(JogadorAtual))
             {
-                desfazMovimento(origem, destino, pecaCapturada);
+                DesfazMovimento(origem, destino, pecaCapturada);
                 throw new TabuleiroException("Não se coloque em Xeque");
             }
 
@@ -54,13 +54,19 @@ namespace xadrez_console.Xadrez
             else
                 Xeque = false;
 
-            Turno++;
-            ProximoPlayer();
+            if (EmXeque(Advesario(JogadorAtual)))
+                FimPartida = true;
+
+            else
+            {
+                Turno++;
+                ProximoPlayer();
+            }
         }
 
-        private void desfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
+        private void DesfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
         {
-            Peca peca = Tabuleiro.retirarPeca(destino);
+            Peca peca = Tabuleiro.RetirarPeca(destino);
             peca.DecrementaMovimento();
             if (pecaCapturada != null)
             {
@@ -94,7 +100,7 @@ namespace xadrez_console.Xadrez
         public void ValidaPosicaoDestino(Posicao origem, Posicao destino)
         {
 
-            if (!Tabuleiro.peca(origem).verificaDestino(destino))
+            if (!Tabuleiro.peca(origem).VerificaDestino(destino))
                 throw new TabuleiroException("Impossivel mover peça para campo selecionado");
         }
 
@@ -163,6 +169,37 @@ namespace xadrez_console.Xadrez
             return false;
         }
 
+        public bool EmXequemate(Cor cor)
+        {
+            if (!EmXeque(cor))
+            {
+                return false;
+            }
+            foreach (Peca peca in SeparaPecasEmjogo(cor))
+            {
+                bool[,] matposicao = peca.MovimentosPossiveis();
+                for (int linha = 0; linha < Tabuleiro.Linhas; linha++)
+                {
+                    for (int coluna = 0; coluna < Tabuleiro.Colunas; coluna++)
+                    {
+                        if (matposicao[linha, coluna])
+                        {
+                            Posicao origem = peca.Posicao;
+                            Posicao destino = new Posicao(linha, coluna);
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino);
+                            bool testeXeque = EmXeque(cor);
+                            DesfazMovimento(origem, destino, pecaCapturada);
+                            if (!testeXeque)
+                                return false;
+                        }
+                    }
+
+                }
+            }
+            return true;
+        }
+
+
         public void NovaPeca(char coluna, int linha, Peca peca)
         {
             Tabuleiro.colocarPeca(peca, new ConverterPosicao(coluna, linha).toPosicao());
@@ -172,19 +209,39 @@ namespace xadrez_console.Xadrez
         private void colocarPecas()
         {
 
-            NovaPeca('c', 1, new Torre(Tabuleiro, Cor.Ciano));
-            NovaPeca('c', 2, new Torre(Tabuleiro, Cor.Ciano));
-            NovaPeca('d', 2, new Torre(Tabuleiro, Cor.Ciano));
-            NovaPeca('e', 2, new Torre(Tabuleiro, Cor.Ciano));
-            NovaPeca('e', 1, new Torre(Tabuleiro, Cor.Ciano));
-            NovaPeca('d', 1, new Rei(Tabuleiro, Cor.Ciano));
-
-            NovaPeca('e', 7, new Torre(Tabuleiro, Cor.Azul));
-            NovaPeca('c', 7, new Torre(Tabuleiro, Cor.Azul));
-            NovaPeca('d', 7, new Torre(Tabuleiro, Cor.Azul));
-            NovaPeca('c', 8, new Torre(Tabuleiro, Cor.Azul));
-            NovaPeca('e', 8, new Torre(Tabuleiro, Cor.Azul));
-            NovaPeca('d', 8, new Rei(Tabuleiro, Cor.Azul));
+            NovaPeca('a', 1, new Torre  (Tabuleiro, Cor.Ciano));
+            NovaPeca('b', 1, new Cavalo (Tabuleiro, Cor.Ciano));
+            NovaPeca('c', 1, new Bispo  (Tabuleiro, Cor.Ciano));
+            NovaPeca('d', 1, new Dama   (Tabuleiro, Cor.Ciano));
+            NovaPeca('e', 1, new Rei    (Tabuleiro, Cor.Ciano));
+            NovaPeca('f', 1, new Bispo  (Tabuleiro, Cor.Ciano));
+            NovaPeca('g', 1, new Cavalo (Tabuleiro, Cor.Ciano));
+            NovaPeca('h', 1, new Torre  (Tabuleiro, Cor.Ciano));
+            //NovaPeca('e', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            //NovaPeca('f', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            //NovaPeca('g', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            //NovaPeca('h', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            //NovaPeca('a', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            //NovaPeca('b', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            //NovaPeca('c', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            //NovaPeca('d', 2, new Peao   (Tabuleiro, Cor.Ciano));
+            
+            NovaPeca('a', 8, new Torre  (Tabuleiro, Cor.Azul));
+            NovaPeca('b', 8, new Cavalo (Tabuleiro, Cor.Azul));
+            NovaPeca('c', 8, new Bispo  (Tabuleiro, Cor.Azul));
+            NovaPeca('d', 8, new Dama   (Tabuleiro, Cor.Azul));
+            NovaPeca('f', 8, new Rei    (Tabuleiro, Cor.Azul));
+            NovaPeca('e', 8, new Bispo  (Tabuleiro, Cor.Azul));
+            NovaPeca('g', 8, new Cavalo (Tabuleiro, Cor.Azul));
+            NovaPeca('h', 8, new Torre  (Tabuleiro, Cor.Azul));
+            //NovaPeca('a', 7, new Peao   (Tabuleiro, Cor.Azul));
+            //NovaPeca('b', 7, new Peao   (Tabuleiro, Cor.Azul));
+            //NovaPeca('c', 7, new Peao   (Tabuleiro, Cor.Azul));
+            //NovaPeca('d', 7, new Peao   (Tabuleiro, Cor.Azul));
+            //NovaPeca('e', 7, new Peao   (Tabuleiro, Cor.Azul));
+            //NovaPeca('f', 7, new Peao   (Tabuleiro, Cor.Azul));
+            //NovaPeca('g', 7, new Peao   (Tabuleiro, Cor.Azul));
+            //NovaPeca('h', 7, new Peao   (Tabuleiro, Cor.Azul));
         }
     }
 }

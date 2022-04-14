@@ -40,7 +40,7 @@
             p.Posicao = pos;
         }
 
-        public Peca retirarPeca(Posicao pos)
+        public Peca RetirarPeca(Posicao pos)
         {
             if (peca(pos) == null)
             {
@@ -52,7 +52,7 @@
             return aux;
         }
 
-        public bool posicaoValida(Posicao pos)
+        public bool PosicaoValida(Posicao pos)
         {
             if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas)
             {
@@ -63,7 +63,7 @@
 
         public void validarPosicao(Posicao pos)
         {
-            if (!posicaoValida(pos))
+            if (!PosicaoValida(pos))
             {
                 throw new TabuleiroException("Posição inválida!");
             }

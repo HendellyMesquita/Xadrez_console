@@ -37,7 +37,7 @@
             }
             return false;
         }
-        public bool verificaDestino(Posicao posicao)
+        public bool VerificaDestino(Posicao posicao)
         {
             return MovimentosPossiveis()[posicao.Linha, posicao.Coluna];
         }
